@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<form action="/action_page.php">
+
+    <input type="radio" id="heading" name="option" value="Heading" onclick="updateContent()">
+    <label for="Heading">Heading</label>
+    <input type="radio" id="Paragraph" name="option" value="Paragraph" onclick="updateContent()">
+    <label for="Paragraph">Paragraph</label>
+    <input type="radio" id="Points" name="option" value="Points" onclick="updateContent()">
+    <label for="Points">Points</label>
+    <input type="radio" id="h3" name="option" value="h3" onclick="updateContent()">
+    <label for="h3">h3</label>
+    <br> <br>
+
+    <select name="Fonts" id="Fonts" onchange="updateContent()">
+        <option value="Arial">Arial</option>
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="Roboto">Roboto</option>
+        <option value="Calibri">Calibri</option>
+    </select>
+    <br><br>
+
+    <div class="slidecontainer">
+        <input type="range" min="1" max="100" value="50" class="slidecontainer" id="myRange" onchange="updateContent()">
+        <p>Value: <span id="demo"></span></p>
+    </div>
+
+    <br><br>
+
+    <label for="fontColor">Choose a font color:</label>
+    <select name="fontColor" id="fontColor" onchange="updateContent()">
+        <option value="Red">Red</option>
+        <option value="Green">Green</option>
+        <option value="Blue">Blue</option>
+        <option value="Yellow">Yellow</option>
+    </select>
+    <br><br>
+
+    <h1 id="dynamicHeading">This Is Heading</h1>
+    <h3 id="dynamicSubHeading">This is Third Level of Heading</h3>
+    <p id="dynamicParagraph">This is Paragraph</p>
+
+    <ul id="dynamicList">
+        <li>First</li>
+        <li>Second</li>
+        <li>Third</li>
+    </ul>
+
+    <script>
+        var slider = document.getElementById("myRange");
+        var output = document.getElementById("demo");
+    
+        output.innerHTML = slider.value;
+    
+        var dynamicHeading = document.getElementById("dynamicHeading");
+        var dynamicSubHeading = document.getElementById("dynamicSubHeading");
+        var dynamicParagraph = document.getElementById("dynamicParagraph");
+        var dynamicList = document.getElementById("dynamicList");
+    
+        slider.oninput = function () {
+            output.innerHTML = this.value;
+            updateContent();
+        }
+    
+        function updateContent() {
+            var selectedElement = document.querySelector('input[name="option"]:checked').value;
+            var selectedFont = document.getElementById("Fonts").value;
+            var selectedColor = document.getElementById("fontColor").value;
+    
+            switch (selectedElement) {
+                case 'Heading':
+                    dynamicHeading.style.fontSize = slider.value + "px";
+                    dynamicHeading.style.color = selectedColor;
+                    dynamicHeading.style.fontFamily = selectedFont;
+                    break;
+                case 'Paragraph':
+                    dynamicParagraph.style.fontSize = slider.value + "px";
+                    dynamicParagraph.style.color = selectedColor;
+                    dynamicParagraph.style.fontFamily = selectedFont;
+                    break;
+                case 'Points':
+                    dynamicList.style.fontSize = slider.value + "px";
+                    dynamicList.style.color = selectedColor;
+                    dynamicList.style.fontFamily = selectedFont;
+                    break;
+                case 'h3':
+                    dynamicSubHeading.style.fontSize = slider.value + "px";
+                    dynamicSubHeading.style.color = selectedColor;
+                    dynamicSubHeading.style.fontFamily = selectedFont;
+                    break;
+                default:
+                    break;
+            }
+        }
+    </script>
+
+</form>
+
+</body>
+</html>
